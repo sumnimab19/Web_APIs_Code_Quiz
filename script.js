@@ -21,7 +21,7 @@ var questionObj = [
     //   answer: ["function:myFunction()", "function = myFunction()", "function myFunction()", "function myFunction"] }
   ];
 
-
+var score = 0;
 var timerInterval;
 // Timer starts at 75 seconds at the beginning of the quiz.
 var secondsLeft = 75;
@@ -50,11 +50,9 @@ function updateTimer() {
 
 
 function questionList(){
-
-    var score = 0;
-
      // another <section> tag created inside <main> tag
     var questionSectionEl = document.createElement("section");
+    questionSectionEl.setAttribute("class","mySection");
     mainEl.appendChild(questionSectionEl);
     questionSectionEl.style.textAlign = "center";
     questionSectionEl.style.margin = "50px";
@@ -66,6 +64,7 @@ function questionList(){
         
         //<ol> tag created inside section
         var answerolEl = document.createElement("ol");
+        answerolEl.setAttribute("class","ol");
         questionSectionEl.appendChild(answerolEl);
 
         for (var j = 0; j < 4; j++){
@@ -78,21 +77,60 @@ function questionList(){
         var hrEl = document.createElement("hr"); 
         questionSectionEl.appendChild(hrEl);
 
-        var answerCheckEl = document.createElement("h3"); 
-
-        answerolEl.addEventListener("click", function(e){
-            var selectedAnswer = e.target.textContent;  
-            console.log(selectedAnswer)          
-        });
-
-        //answerCheckEl.textContent =  answerResult(); // create answerResult function down somewhere that returns correct or wrong string.
-        questionSectionEl.appendChild(answerCheckEl);
+        answerResult(); 
     }
 }
 
+
+
 function answerResult(){
-    
-    }
+    var olEl = document.querySelector(".ol");
+    olEl.addEventListener("click", checkAnswer);    
+};
 
 
+function checkAnswer(e){
+
+    var selectedAnswer = e.target.textContent;  
+
+    var secondSection = document.querySelector(".mySection");
+    var answerCheckEl = document.createElement("h3"); 
+    secondSection.appendChild(answerCheckEl);
+
+    var questionAnswer = [
+        { question: "Inside which HTML element do we put the JavaScript?",
+          answer: "<script>"},
+        
+        { question: "Where is the correct place to insert a JavaScript?",
+          answer: "The <body> section}"},
+            
+        { question: "What is the correct syntax for referring to an external script called 'xxx.js'?",
+          answer:  "<scipt src = 'xxx.js'>"},
+            
+        { question: "How do you write 'Hello World' in an alert box?",
+          answer: "alert('Hello World')"},
+            
+        { question: "How do you create a function in JavaScript?",
+          answer: "function myFunction()"}
+    ];
     
+    
+        // Loop over every question object
+        for (var i = 0; i < questionAnswer.length; i++) {
+              // Compare answers
+            
+            if (selectedAnswer === questionAnswer[i].answer) {
+                // Increase score
+                score = score + 10;
+                answerCheckEl.textContent = "Correct";
+            } else {
+                score = score - 10;
+                secondsLeft = secondsLeft - 10;
+                answerCheckEl.textContent = "Wrong";
+            }
+            questionList();
+            
+        }
+}
+    
+
