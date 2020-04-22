@@ -57,19 +57,30 @@ function questionList(){
     questionSectionEl.style.textAlign = "center";
     questionSectionEl.style.margin = "50px";
 
-    //<ul> tag created inside section
-    var answerulEl = document.createElement("ul");
-    questionSectionEl.appendChild(answerulEl);
+    
     
 
     for (var i = 0; i < questionObj.length; i++) {
         var questionEl = document.createElement("h4"); 
         questionEl.textContent = JSON.stringify(questionObj[i].question); 
-        answerulEl.appendChild(questionEl);
+        questionSectionEl.appendChild(questionEl);
         
-        var answerliEl = document.createElement("li"); 
-        answerliEl.textContent = (questionObj[i].answer);
+
+        //<ul> tag created inside section
+        var answerulEl = document.createElement("ul");
+        questionSectionEl.appendChild(answerulEl);
+
+        
+        for (var j = 0; j < 4; j++){
+            var answerliEl = document.createElement("li"); 
+        
+        answerliEl.textContent = (questionObj[i].answer[j]);
+        console.log(answerliEl)
         answerulEl.appendChild(answerliEl);
+        questionSectionEl.style.textAlign = "center";
+        }
+
+        
 
 
   }
