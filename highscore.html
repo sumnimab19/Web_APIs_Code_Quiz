@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Highscore</title>
+    <style>
+        .main{
+            text-align: center;
+            width: 80vw;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <main class="main">
+        <h1>Highscores</h1>
+        <br>
+        <br>
+        <p class="initialStore"></p>
+        <p class="scoreStore"></p>
+        <br>
+        <br>
+        <button class="btn btn-success">Back to Quiz</button>
+    </main>
+    
+    <script>
+
+        // Back to Quiz button takes to index.html
+        var buttonEl = document.querySelector(".btn");
+        buttonEl.addEventListener("click", function(){
+        location.href = "index.html";
+        });
+        
+        // This function gets the stored values from local storage
+        function highScoreGet(){
+            var scoreGet = document.querySelector(".scoreStore");
+            var initialGet = document.querySelector(".initialStore");
+            initialGet.textContent = localStorage.getItem("initial");
+            scoreGet.textContent = localStorage.getItem("score");
+        }
+        
+        highScoreGet()
+    </script>
+
+</body>
+</html>
