@@ -198,15 +198,19 @@ function finalScoreMessage(){
 
 // This function stores score of the user and saves it in the local storage
 function highScoreStore() {
-  location.href = "highscore.html";
-  var initialEl = document.querySelector(".initial");
-  var initial = initialEl.value.toUpperCase();
+  // location.href = "highscore.html";
+  var initial = document.querySelector(".initial").value.toUpperCase();
+  var errorMsg = document.createElement("p");
+  errorMsg.textContent = "* Initial field can't be blank.";
+  errorMsg.style.color = "red";
   
-  if(initial.value !== null){
+  var finalScorePage = document.querySelector(".final");
+  finalScorePage.appendChild(errorMsg);
+  
+  if(initial !== ""){
     localStorage.setItem("score",score);
     localStorage.setItem("initial", initial);
-  } else {
-      alert("Initial can't be blank. Please enter your initial to save your score.")
+    location.href = "highscore.html";
   } 
 }
 
