@@ -1,49 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Highscore</title>
-    <style>
-        .main{
-            text-align: center;
-            width: 80vw;
-            margin: 50px;
-        }
-    </style>
-</head>
-<body>
-    <main class="main">
-        <h1>Highscores</h1>
-        <br>
-        <br>
-        <p class="initialStore"></p>
-        <p class="scoreStore"></p>
-        <br>
-        <br>
-        <button class="btn btn-success">Back to Quiz</button>
-    </main>
-    
-    <script>
+        <title>Highscore</title>
+        <style>
+            .main {
+                text-align: center;
+                width: 80vw;
+                margin: 50px;
+            }
+            
+            .scoreTable, th, td {
+                width: 20vw;
+                margin-left:auto; 
+                margin-right:auto;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
 
-        // Back to Quiz button takes to index.html
-        var buttonEl = document.querySelector(".btn");
-        buttonEl.addEventListener("click", function(){
-        location.href = "index.html";
-        });
+    <body>
+        <main class="main">
+            <h1>Highscores</h1>
+            <br>
+            <br>
         
-        // This function gets the stored values from local storage
-        function highScoreGet(){
-            var scoreGet = document.querySelector(".scoreStore");
-            var initialGet = document.querySelector(".initialStore");
-            initialGet.textContent = localStorage.getItem("initial");
-            scoreGet.textContent = localStorage.getItem("score");
-        }
+            <table class="scoreTable">
+                <tr>
+                    <th class="scoreHeader">Initial</th>
+                    <th class="scoreHeader">Score</th>
+                </tr>
+                <tr class="scoreRowTwo">
+                    <td class="initialData"></td>
+                    <td class="scoreData"></td>
+                </tr>
+            </table>
+            
+            <br>
+            <br>
+            <button class="btn btn-success">Back to Quiz</button>
+            <button class="btn btn-danger clearHS">Clear Highscore</button>
+        </main>
         
-        highScoreGet()
-    </script>
+        <script>
 
-</body>
+            // Back to Quiz button takes to index.html
+            var backButtonEl = document.querySelector(".btn-success");
+            backButtonEl.addEventListener("click", function(){
+                location.href = "index.html";
+            });
+
+            
+            // function highScoreGet(){
+            //     var initialGet = document.querySelector(".initialData");
+            //     var scoreGet = document.querySelector(".scoreData");
+            //     initialGet.textContent = localStorage.getItem("initial");
+            //     scoreGet.textContent = localStorage.getItem("score");
+            // }
+
+
+            // This function gets the stored values from local storage
+            function highScoreGet(){
+                var initialGet = document.querySelector(".initialData");
+                var scoreGet = document.querySelector(".scoreData");
+                var dataArray = JSON.parse(localStorage.getItem("quizResult"));
+
+                for(var i = 0; i < localStorage.length; i++){
+                    initialGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(13,15));
+                    if ((localStorage.getItem(localStorage.key(i)).length) === 33) {
+                        scoreGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(30,31));
+                    } else {
+                        scoreGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(30,32));
+                    }
+                } 
+            }
+
+            highScoreGet()
+
+            // Added event listener to Clear Highscore button
+            var clearButtonEl = document.querySelector(".btn-danger");
+            clearButtonEl.addEventListener("click", clearData);
+
+
+            // This function clears the data from Highscore table as well as from local storage
+            function clearData(){
+                var initialGet = document.querySelector(".initialData");
+                var scoreGet = document.querySelector(".scoreData");
+                localStorage.clear();
+                initialGet.textContent = "";
+                scoreGet.textContent = "";
+            }
+        </script>
+
+    </body>
 </html>

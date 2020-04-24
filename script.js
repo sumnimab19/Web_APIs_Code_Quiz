@@ -124,7 +124,7 @@ function checkAnswer(e){
   } else {
 
     // If the selectAnswer does not match the correctAnswer, score decreases by 2 and Time left is also decreases by 10 seconds. And result will display as Wrong at the bottom.
-      score = score - 2;
+      //score = score - 2;
       secondsLeft = secondsLeft - 10;
       
       answerCheckEl.textContent = "Wrong";
@@ -196,7 +196,48 @@ function finalScoreMessage(){
 };
 
 
-// This function stores score of the user and saves it in the local storage
+// This function displays error message is user tries to save the score without entering initial
+function highScoreStore() {
+  var initial = document.querySelector(".initial");
+  var errorMsg = document.createElement("p");
+  errorMsg.textContent = "* Initial field can't be blank.";
+  errorMsg.style.color = "red";
+
+  var finalScorePage = document.querySelector(".final");
+  finalScorePage.appendChild(errorMsg);
+  
+  console.log((initial.value).length)
+
+  if(initial !== "") {
+    addStoredValue();
+  } 
+  
+  // && ((initial.value).length === 2))
+  // else {
+  //   alert("Please enter only 2 letters initial.")
+  // }
+}
+
+var storedValues = [];
+ 
+// This function stores user input initial value and score to the local storage
+function addStoredValue (){
+  var storedObject = {
+  initial: document.querySelector(".initial").value.toUpperCase(),
+  scoreValue: score
+  };
+  storedValues.push(storedObject);
+
+  localStorage.setItem("quizResult", JSON.stringify(storedValues));
+    //localStorage.setItem("score",score);
+    // localStorage.setItem("initial", initial);
+  location.href = "highscore.html";
+} 
+
+
+
+
+/*
 function highScoreStore() {
   // location.href = "highscore.html";
   var initial = document.querySelector(".initial").value.toUpperCase();
@@ -212,10 +253,7 @@ function highScoreStore() {
     localStorage.setItem("initial", initial);
     location.href = "highscore.html";
   } 
-}
-
-
-  
+} */  
   
   
 
