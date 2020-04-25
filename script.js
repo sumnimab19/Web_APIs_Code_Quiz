@@ -163,12 +163,15 @@ function checkAnswer(e){
 
     // If the selectAnswer does not match the correctAnswer, score decreases by 2 and Time left is also decreases by 10 seconds. And result will display as Wrong at the bottom.
       //score = score - 2;
+      if(secondsLeft <= 1){
+        hideAllSection();
+      } else {
       secondsLeft = secondsLeft - 10;
       
       answerCheckEl.textContent = "Wrong";
       answerCheckEl.style.color = "red"; 
       answerCheckEl.style.marginBottom = "40px";  
-      
+      }
     
   }
 
@@ -203,23 +206,8 @@ function finalScoreMessage(){
 
   // Hiding the question list section --  THIS NEEDS TO BE FIXED.
   //var x = document.querySelector("." + sectionArray[nextSectionIndex]);
-  if(nextSectionIndex === 0){
-    var a = document.querySelector(".qone");
-    a.style.display = "none";
-  } else if (nextSectionIndex === 1){
-    var a = document.querySelector(".qtwo");
-    a.style.display = "none";
-  } else if (nextSectionIndex === 2){
-    var a = document.querySelector(".qthree");
-    a.style.display = "none";
-  } else if (nextSectionIndex === 3){
-    var a = document.querySelector(".qfour");
-    a.style.display = "none";
-  } else if (nextSectionIndex === 4){
-    var a = document.querySelector(".qfive");
-    a.style.display = "none";
-  }
-
+  
+  hideAllSection();
   
   
   secondsLeft = 1;
@@ -260,6 +248,26 @@ function finalScoreMessage(){
   submitButton.addEventListener("click", highScoreStore);
 };
 
+
+
+function hideAllSection(){
+  if(nextSectionIndex === 0){
+    var a = document.querySelector(".qone");
+    a.style.display = "none";
+  } else if (nextSectionIndex === 1){
+    var a = document.querySelector(".qtwo");
+    a.style.display = "none";
+  } else if (nextSectionIndex === 2){
+    var a = document.querySelector(".qthree");
+    a.style.display = "none";
+  } else if (nextSectionIndex === 3){
+    var a = document.querySelector(".qfour");
+    a.style.display = "none";
+  } else if (nextSectionIndex === 4){
+    var a = document.querySelector(".qfive");
+    a.style.display = "none";
+  }
+}
 
 // This function displays error message is user tries to save the score without entering initial
 function highScoreStore() {
