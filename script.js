@@ -32,8 +32,11 @@ var score = 0;
 var timerInterval;
 
 // Timer starts at 60 seconds at the beginning of the quiz.
-var secondsLeft = 60;
+var secondsLeft = 25;
 timeEl.textContent = "Time: " + secondsLeft;
+
+
+var sectionArray = ["qone","qtwo","qthree","qfour","qfive"];
 
 // Start Quiz button clicked
 buttonEl.addEventListener("click", function(){
@@ -59,22 +62,31 @@ function updateTimer() {
     finalScoreMessage();
   }
 
- // Another <section> tag created inside <main> tag with some styles and attribute
- var questionSectionEl = document.createElement("section");
- questionSectionEl.setAttribute("class","qone");
- mainEl.appendChild(questionSectionEl);
- questionSectionEl.style.textAlign = "center";
- questionSectionEl.style.margin = "50px";
- questionSectionEl.style.padding = "50px";
-
+ // Another <section> tag created inside <main> tag with some styles and attribute to store a question/answer set
+ 
  var nextQuestionIndex = 0;
  var lastQuestionIndex = questionObj.length;
  var dataIndex = 0; // I may not need this. TAKE A LOOK AT IT LATER.
+ var nextSectionIndex = 0;
 
  // This function displays the question and 4 answer options
  function questionList(){ 
 
    // Question is appear in <h4> tag.
+   // trial code 4/24
+ var questionSectionEl = document.createElement("section");
+ questionSectionEl.setAttribute("class",sectionArray[nextSectionIndex]);
+ mainEl.appendChild(questionSectionEl);
+ questionSectionEl.style.textAlign = "center";
+ questionSectionEl.style.margin = "50px";
+ questionSectionEl.style.padding = "50px";
+
+  //  if(nextQuestionIndex !== 0){
+      
+  //     nextSection();
+      
+  // }
+   //
     var questionEl = document.createElement("h4"); 
     questionEl.setAttribute("data-index", dataIndex);
     questionEl.setAttribute("class", "qHeader");
@@ -100,19 +112,43 @@ function updateTimer() {
     var hrEl = document.createElement("hr"); 
     questionSectionEl.appendChild(hrEl);
     hrEl.style.marginBottom = "0px";
+
+    var answerCheckEl = document.createElement("h4"); 
+    answerCheckEl.setAttribute("class", "resultText");  
+    questionSectionEl.appendChild(answerCheckEl);
     
     // Event Delegation: Added click event to entire <ol> tag instead of just for each <li> tag. Click Event will bubble up to it's (<li> tag) parent which is <ol> and gets executed
     answerolEl.addEventListener("click", checkAnswer);     
-}
+  }
+
+
+
+// function nextSection(){
+  
+//       var questionSectionElT = document.createElement("section");
+      
+//       mainEl.appendChild(questionSectionElT);
+//       questionSectionElT.style.textAlign = "center";
+//       questionSectionElT.style.margin = "50px";
+//       questionSectionElT.style.padding = "50px";
+      
+//       questionSectionElT.setAttribute("class",sectionArray[nextSectionIndex]);
+//       questionList();
+//      // questionSectionEl = questionSectionElT;
+// }
+
+
 
 // This function checks the answer for each question. 'nextQuestionIndex' will get to the next question every cycle
 function checkAnswer(e){
-
+  // alert("are you there?")
   // selectedAnswer stores the value of the option user has clicked
   var selectedAnswer = e.target.textContent;  
-  var secondSection = document.querySelector(".qone");
-  var answerCheckEl = document.createElement("h4"); 
-  secondSection.appendChild(answerCheckEl);
+  e.stopPropagation();
+  //var secondSection = document.querySelector("." + sectionArray[nextSectionIndex]);
+ 
+  var answerCheckEl = document.querySelector(".resultText");
+  // var answerCheckEl = document.createElement("h4"); 
 
   //If the selectedAnswer matches the correctAnswer from the questionObj object's, score is increased by 10 points. And result will display as Correct or Wrong at the bottom.    
   if (selectedAnswer === questionObj[nextQuestionIndex].correctAnswer) {
@@ -121,6 +157,8 @@ function checkAnswer(e){
       answerCheckEl.textContent = "Correct";
       answerCheckEl.style.color = "green";
       answerCheckEl.style.marginBottom = "40px";
+
+      
   } else {
 
     // If the selectAnswer does not match the correctAnswer, score decreases by 2 and Time left is also decreases by 10 seconds. And result will display as Wrong at the bottom.
@@ -130,32 +168,59 @@ function checkAnswer(e){
       answerCheckEl.textContent = "Wrong";
       answerCheckEl.style.color = "red"; 
       answerCheckEl.style.marginBottom = "40px";  
+      
+    
   }
 
   // nextQuestion function is called to get another question from the questionObj object
-  nextQuestion();
+  setTimeout(nextQuestion, 1000);
+  //nextQuestion();
+  
 }
 
 // This function is to get another question from the questionObj object.
 function nextQuestion(){
+  y = document.querySelector("." + sectionArray[nextSectionIndex]);
+  y.style.display = "none";
+
+  
   nextQuestionIndex++;
   dataIndex++; // I MAY NOT NEED THIS. TAKE A LOOK AT IT LATER.
-
+  nextSectionIndex++;
+  
   // When the user gets to the last question, final score section will display. Otherwise, displays another question from the list in object
   if(nextQuestionIndex === lastQuestionIndex)  {
     finalScoreMessage();
   } else  {
+    // document.querySelector(".qone").style.display = "none";
     questionList();
-  }
+  } 
 }
 
 
 // This function displays user's final score along with input box to put their initial and button to save the highscore.
 function finalScoreMessage(){
 
-  // Hiding the question list section
-  var x = document.querySelector(".qone")
-  x.style.display = "none";
+  // Hiding the question list section --  THIS NEEDS TO BE FIXED.
+  //var x = document.querySelector("." + sectionArray[nextSectionIndex]);
+  if(nextSectionIndex === 0){
+    var a = document.querySelector(".qone");
+    a.style.display = "none";
+  } else if (nextSectionIndex === 1){
+    var a = document.querySelector(".qtwo");
+    a.style.display = "none";
+  } else if (nextSectionIndex === 2){
+    var a = document.querySelector(".qthree");
+    a.style.display = "none";
+  } else if (nextSectionIndex === 3){
+    var a = document.querySelector(".qfour");
+    a.style.display = "none";
+  } else if (nextSectionIndex === 4){
+    var a = document.querySelector(".qfive");
+    a.style.display = "none";
+  }
+
+  
   
   secondsLeft = 1;
    
@@ -206,7 +271,6 @@ function highScoreStore() {
   var finalScorePage = document.querySelector(".final");
   finalScorePage.appendChild(errorMsg);
   
-  console.log((initial.value).length)
 
   if(initial !== "") {
     addStoredValue();
