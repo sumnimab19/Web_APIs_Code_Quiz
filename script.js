@@ -144,7 +144,7 @@ function checkAnswer(e){
   // alert("are you there?")
   // selectedAnswer stores the value of the option user has clicked
   var selectedAnswer = e.target.textContent;  
-  e.stopPropagation();
+  //e.stopPropagation();
   //var secondSection = document.querySelector("." + sectionArray[nextSectionIndex]);
  
   var answerCheckEl = document.querySelector(".resultText");
@@ -234,6 +234,7 @@ function finalScoreMessage(){
 
   inputEl = document.createElement("input"); 
   inputEl.setAttribute("class","initial")
+  //inputEl.style.border = "thin solid black";
   finalScorePage.appendChild(inputEl);
 
   submitButton = document.createElement("button");
@@ -246,7 +247,7 @@ function finalScoreMessage(){
 
   // Added event listener to Submit button.
   submitButton.addEventListener("click", highScoreStore);
-};
+}
 
 
 
@@ -271,17 +272,19 @@ function hideAllSection(){
 
 // This function displays error message is user tries to save the score without entering initial
 function highScoreStore() {
-  var initial = document.querySelector(".initial");
-  var errorMsg = document.createElement("p");
-  errorMsg.textContent = "* Initial field can't be blank.";
-  errorMsg.style.color = "red";
-
-  var finalScorePage = document.querySelector(".final");
-  finalScorePage.appendChild(errorMsg);
+  // e.preventDefault();
   
-
-  if(initial !== "") {
-    addStoredValue();
+  var initial = document.querySelector(".initial");
+  var initialValue = initial.value;
+  var errorMsg = document.createElement("p");
+ 
+  if(initialValue === ""){
+    errorMsg.textContent = "* Initial field can't be blank.";
+    errorMsg.style.color = "red";
+    var finalScorePage = document.querySelector(".final");
+    finalScorePage.appendChild(errorMsg);
+  } else if(initialValue !== "") {
+      addStoredValue();
   } 
   
   // && ((initial.value).length === 2))
