@@ -269,7 +269,6 @@ function getValueFromLocalStorage(){
     
     if (dataArray !== null) {
       storedValues = dataArray;
-      console.log(storedValues)
     }
 }
 
