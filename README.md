@@ -32,18 +32,25 @@ THEN User can save their initials and score
 4. Bootstrap
 
 
-## Screenshot
+## Screenshots
+
+### Beginning of the Quiz
 <img width="570" alt="Screen Shot 2020-04-25 at 11 08 48 PM" src="https://user-images.githubusercontent.com/55207625/80299564-3c774300-874a-11ea-89d3-14f30b5acd44.png">
 
+
+### End of the Quiz 
 <img width="569" alt="Screen Shot 2020-04-25 at 11 09 17 PM" src="https://user-images.githubusercontent.com/55207625/80299581-629ce300-874a-11ea-924f-4da7dc949daa.png">
 
+
+### Highscore Page 
 <img width="591" alt="Screen Shot 2020-04-25 at 11 09 41 PM" src="https://user-images.githubusercontent.com/55207625/80299589-6f213b80-874a-11ea-8968-11621d2104fe.png">
 
 
 
-## GIF
+## GIFs
 
-### Quiz Flow:
+
+### Quiz Start to End Flow:
 ![CodingQuiz](https://user-images.githubusercontent.com/55207625/80299593-7e07ee00-874a-11ea-8145-b0f37af719c1.gif)
 
 
