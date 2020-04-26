@@ -39,7 +39,7 @@ THEN User can save their initials and score
 
 
 
-### End of the Quiz 
+### Question/Answer set display 
 <img width="569" alt="Screen Shot 2020-04-25 at 11 09 17 PM" src="https://user-images.githubusercontent.com/55207625/80299581-629ce300-874a-11ea-924f-4da7dc949daa.png">
 
 
