@@ -44,7 +44,7 @@ THEN User can save their initials and score
 
 
 
-### Highscore Page 
+### Final Score Page 
 <img width="591" alt="Screen Shot 2020-04-25 at 11 09 41 PM" src="https://user-images.githubusercontent.com/55207625/80299589-6f213b80-874a-11ea-8968-11621d2104fe.png">
 
 
