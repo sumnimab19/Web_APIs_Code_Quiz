@@ -81,10 +81,11 @@ function updateTimer() {
     // A new section element created to hold each question/answer set
     var questionSectionEl = document.createElement("section");
     questionSectionEl.setAttribute("class",sectionArray[nextSectionIndex]);
+    questionSectionEl.setAttribute("id","qsection");
     mainEl.appendChild(questionSectionEl);
     questionSectionEl.style.textAlign = "center";
-    questionSectionEl.style.margin = "50px";
-    questionSectionEl.style.padding = "50px";
+    questionSectionEl.style.margintop = "50px";
+    questionSectionEl.style.paddingTop = "50px";
 
     // This holds question
     var questionEl = document.createElement("h4"); 

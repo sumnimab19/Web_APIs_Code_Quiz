@@ -3,9 +3,25 @@
 }
 
 .main {
-    width: 80vw;
     margin: 50px;
 }
   
+/* Formatting section to show width in Medium Screen */
+@media (min-width: 768px)  {
+    #qsection {
+        width: 70%;
+        margin-left: 30px;
+    }
+}
+
+/* Formatting section to show width in Large Screen */
+@media (min-width: 1024px)  {
+    #qsection {
+        width: 60%;
+        margin-left: 30px;
+    }
+}
+
+
   
   
