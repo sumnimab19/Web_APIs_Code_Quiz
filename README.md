@@ -5,16 +5,16 @@
 
 ## Description
 
-This application is a JavaScript questions quiz with multiple-choice answer. It also features a clean user interface and be responsive, ensuring that it adapts to multiple screen sizes. This app runs in the browser and feature dynamically updated HTML and CSS powered by JavaScript. 
+This application is a JavaScript questions quiz with multiple-choice answer. It also features a clean user interface and be responsive, ensuring that it adapts to multiple screen sizes.  This app has 5 JavaScript basic questions. The user should click on a answer to get to another questions. If the answer is correct, 'Correct' is displayed on green text and if the answer is incorrect, 'Wrong' is displayed in red text.
 
 ## Use Cases
 
-Users WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT Users can gauge their progress compared to their peers
+User WANTs to take a timed quiz on JavaScript fundamentals that stores high scores
+SO THAT User can gauge their progress compared to their peers
 
 GIVEN User is taking a code quiz
 WHEN User click the start button
-THEN a timer starts at 75 seconds and User is presented with a question
+THEN a timer starts at 75 seconds and user is presented with a question
 WHEN User answer a question
 THEN User is presented with another question
 WHEN User answer a question incorrectly
@@ -38,8 +38,10 @@ THEN User can save their initials and score
 <img width="570" alt="Screen Shot 2020-04-25 at 11 08 48 PM" src="https://user-images.githubusercontent.com/55207625/80299564-3c774300-874a-11ea-89d3-14f30b5acd44.png">
 
 
+
 ### End of the Quiz 
 <img width="569" alt="Screen Shot 2020-04-25 at 11 09 17 PM" src="https://user-images.githubusercontent.com/55207625/80299581-629ce300-874a-11ea-924f-4da7dc949daa.png">
+
 
 
 ### Highscore Page 
@@ -49,9 +51,9 @@ THEN User can save their initials and score
 
 ## GIFs
 
-
 ### Quiz Start to End Flow:
 ![CodingQuiz](https://user-images.githubusercontent.com/55207625/80299593-7e07ee00-874a-11ea-8145-b0f37af719c1.gif)
+
 
 
 ### Highscore Page and Delete Highscore:
