@@ -19,6 +19,12 @@
                 margin-right:auto;
                 border: 1px solid black;
             }
+
+            #tableContainer {
+                display:flex;
+                justify-content: center;
+                align-items: center;
+            }
         </style>
     </head>
 
@@ -27,17 +33,8 @@
             <h1>Highscores</h1>
             <br>
             <br>
-        
-            <table class="scoreTable">
-                <tr>
-                    <th class="scoreHeader">Initial</th>
-                    <th class="scoreHeader">Score</th>
-                </tr>
-                <tr class="scoreRowTwo">
-                    <td class="initialData"></td>
-                    <td class="scoreData"></td>
-                </tr>
-            </table>
+
+            <div id="tableContainer"></div>
             
             <br>
             <br>
@@ -53,14 +50,6 @@
                 location.href = "index.html";
             });
 
-            
-            // function highScoreGet(){
-            //     var initialGet = document.querySelector(".initialData");
-            //     var scoreGet = document.querySelector(".scoreData");
-            //     initialGet.textContent = localStorage.getItem("initial");
-            //     scoreGet.textContent = localStorage.getItem("score");
-            // }
-
 
             // This function gets the stored values from local storage
             function highScoreGet(){
@@ -68,17 +57,44 @@
                 var scoreGet = document.querySelector(".scoreData");
                 var dataArray = JSON.parse(localStorage.getItem("quizResult"));
 
-                for(var i = 0; i < localStorage.length; i++){
-                    initialGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(13,15));
-                    if ((localStorage.getItem(localStorage.key(i)).length) === 33) {
-                        scoreGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(30,31));
-                    } else {
-                        scoreGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(30,32));
-                    }
-                } 
+                if(dataArray != null){
+                    var newDataArray = dataArray;
+                }
+                
+                // var tableEl = "<table border='1|1'>";
+                //     console.log(tableEl)
+
+                // for(var i = 0; i < localStorage.length; i++){
+                //     initialGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(13,15));
+                //     if ((localStorage.getItem(localStorage.key(i)).length) === 33) {
+                //         scoreGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(30,31));
+                //     } else {
+                //         scoreGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(30,32));
+                //     }
+                // } 
+
+
+                var makeTable = "<table border='1|0'>";
+                    makeTable+="<th>"+"Initial";
+                        makeTable+="<th>"+"Score";
+for (var i = 0; i < newDataArray.length; i++) {
+    makeTable+="<tr>";
+    makeTable+="<td>"+newDataArray[i].initial+"</td>";
+    makeTable+="<td>"+newDataArray[i].scoreValue+"</td>";
+   
+
+    makeTable+="</tr>";
+
+}
+makeTable+="</table>";
+document.getElementById("tableContainer").innerHTML = makeTable;
+
+
+
             }
 
             highScoreGet()
+
 
             // Added event listener to Clear Highscore button
             var clearButtonEl = document.querySelector(".btn-danger");
@@ -97,3 +113,30 @@
 
     </body>
 </html>
+
+
+
+<!-- 
+
+ function highScoreGet(){
+                var initialGet = document.querySelector(".initialData");
+                var scoreGet = document.querySelector(".scoreData");
+                var dataArray = JSON.parse(localStorage.getItem("quizResult"));
+
+                console.log(dataArray)
+
+                for(var i = 0; i < localStorage.length; i++){
+                    initialGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(13,15));
+                    if ((localStorage.getItem(localStorage.key(i)).length) === 33) {
+                        scoreGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(30,31));
+                    } else {
+                        scoreGet.textContent = (localStorage.getItem(localStorage.key(i)).slice(30,32));
+                    }
+                } 
+            }
+
+            highScoreGet()
+
+
+
+ -->

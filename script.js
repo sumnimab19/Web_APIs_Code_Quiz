@@ -35,6 +35,7 @@ var timerInterval;
 var secondsLeft = 25;
 timeEl.textContent = "Time: " + secondsLeft;
 
+var storedValues = [];
 
 var sectionArray = ["qone","qtwo","qthree","qfour","qfive"];
 
@@ -62,6 +63,13 @@ function updateTimer() {
     finalScoreMessage();
   }
 
+
+  getValueFromLocalStorage();
+
+  console.log(storedValues)
+
+
+
  // Another <section> tag created inside <main> tag with some styles and attribute to store a question/answer set
  
  var nextQuestionIndex = 0;
@@ -81,12 +89,10 @@ function updateTimer() {
  questionSectionEl.style.margin = "50px";
  questionSectionEl.style.padding = "50px";
 
-  //  if(nextQuestionIndex !== 0){
+ 
       
-  //     nextSection();
-      
-  // }
-   //
+  
+   
     var questionEl = document.createElement("h4"); 
     questionEl.setAttribute("data-index", dataIndex);
     questionEl.setAttribute("class", "qHeader");
@@ -123,32 +129,20 @@ function updateTimer() {
 
 
 
-// function nextSection(){
-  
-//       var questionSectionElT = document.createElement("section");
-      
-//       mainEl.appendChild(questionSectionElT);
-//       questionSectionElT.style.textAlign = "center";
-//       questionSectionElT.style.margin = "50px";
-//       questionSectionElT.style.padding = "50px";
-      
-//       questionSectionElT.setAttribute("class",sectionArray[nextSectionIndex]);
-//       questionList();
-//      // questionSectionEl = questionSectionElT;
-// }
-
-
-
 // This function checks the answer for each question. 'nextQuestionIndex' will get to the next question every cycle
 function checkAnswer(e){
   // alert("are you there?")
   // selectedAnswer stores the value of the option user has clicked
   var selectedAnswer = e.target.textContent;  
-  //e.stopPropagation();
+  e.preventDefault();
   //var secondSection = document.querySelector("." + sectionArray[nextSectionIndex]);
- 
-  var answerCheckEl = document.querySelector(".resultText");
+  
+  var answerCheckEl = e.target.parentNode.parentNode.querySelector(".resultText");
+
+  
   // var answerCheckEl = document.createElement("h4"); 
+
+  //console.log(answerCheckEl);
 
   //If the selectedAnswer matches the correctAnswer from the questionObj object's, score is increased by 10 points. And result will display as Correct or Wrong at the bottom.    
   if (selectedAnswer === questionObj[nextQuestionIndex].correctAnswer) {
@@ -157,7 +151,8 @@ function checkAnswer(e){
       answerCheckEl.textContent = "Correct";
       answerCheckEl.style.color = "green";
       answerCheckEl.style.marginBottom = "40px";
-
+     
+      
       
   } else {
 
@@ -165,12 +160,16 @@ function checkAnswer(e){
       //score = score - 2;
       if(secondsLeft <= 1){
         hideAllSection();
+        return;
       } else {
       secondsLeft = secondsLeft - 10;
       
       answerCheckEl.textContent = "Wrong";
       answerCheckEl.style.color = "red"; 
       answerCheckEl.style.marginBottom = "40px";  
+
+      
+      
       }
     
   }
@@ -272,64 +271,64 @@ function hideAllSection(){
 
 // This function displays error message is user tries to save the score without entering initial
 function highScoreStore() {
-  // e.preventDefault();
+  //e.preventDefault();
   
   var initial = document.querySelector(".initial");
   var initialValue = initial.value;
   var errorMsg = document.createElement("p");
  
-  if(initialValue === ""){
+  if(initialValue === ""){ 
     errorMsg.textContent = "* Initial field can't be blank.";
     errorMsg.style.color = "red";
     var finalScorePage = document.querySelector(".final");
     finalScorePage.appendChild(errorMsg);
   } else if(initialValue !== "") {
       addStoredValue();
+      //location.href = "highscore.html";
+      getValueFromLocalStorage();
   } 
   
   // && ((initial.value).length === 2))
   // else {
   //   alert("Please enter only 2 letters initial.")
   // }
+} 
+
+
+function getValueFromLocalStorage(){
+  var dataArray = JSON.parse(localStorage.getItem("quizResult"));
+  
+
+  if (dataArray !== null) {
+    storedValues = dataArray;
+    console.log(storedValues)
+  }
+  
 }
 
-var storedValues = [];
- 
 // This function stores user input initial value and score to the local storage
 function addStoredValue (){
+  
   var storedObject = {
   initial: document.querySelector(".initial").value.toUpperCase(),
   scoreValue: score
   };
+  
+ 
   storedValues.push(storedObject);
 
-  localStorage.setItem("quizResult", JSON.stringify(storedValues));
-    //localStorage.setItem("score",score);
-    // localStorage.setItem("initial", initial);
-  location.href = "highscore.html";
+
+ //return storedValues;
+ storeValuesToLocalStorage();
+  //location.href = "highscore.html"; THIS WAS ORIGINALLY HERE BUT TRIED AT HIGHSCORESTORE FUNCTION. TAKE A LOOK AT IT LATER
 } 
 
+function storeValuesToLocalStorage(){
+  localStorage.setItem("quizResult", JSON.stringify(storedValues));
+  callHighscorePage();
+}
 
-
-
-/*
-function highScoreStore() {
-  // location.href = "highscore.html";
-  var initial = document.querySelector(".initial").value.toUpperCase();
-  var errorMsg = document.createElement("p");
-  errorMsg.textContent = "* Initial field can't be blank.";
-  errorMsg.style.color = "red";
-  
-  var finalScorePage = document.querySelector(".final");
-  finalScorePage.appendChild(errorMsg);
-  
-  if(initial !== ""){
-    localStorage.setItem("score",score);
-    localStorage.setItem("initial", initial);
-    location.href = "highscore.html";
-  } 
-} */  
-  
-  
-
+function callHighscorePage(){
+  location.href = "highscore.html";
+}
 
