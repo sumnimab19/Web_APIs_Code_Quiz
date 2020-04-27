@@ -72,7 +72,6 @@ function updateTimer() {
 
  var nextQuestionIndex = 0; 
  var lastQuestionIndex = questionObj.length;
-//  var dataIndex = 0; // I may not need this. TAKE A LOOK AT IT LATER.
  var nextSectionIndex = 0;
 
  // This function displays the question and 4 answer options
@@ -97,7 +96,6 @@ function updateTimer() {
     //<ol> tag created inside section to hold 4 answer options
     var answerolEl = document.createElement("ol");
     answerolEl.setAttribute("class","ol");
-    //answerolEl.setAttribute("data-index", dataIndex); // I MAY NOT NEED THIS. TAKE A LOOK AT IT LATER.
     questionSectionEl.appendChild(answerolEl);
 
     // <li> tag is created to hold each of the 4 answer options
@@ -165,7 +163,6 @@ function nextQuestion(){
     previousQuestion.style.display = "none";
 
     nextQuestionIndex++;
-    // dataIndex++; // I MAY NOT NEED THIS. TAKE A LOOK AT IT LATER.
     nextSectionIndex++;
     
     // When the user gets to the last question, final score section will display. Otherwise, displays another question from the list in object
@@ -180,7 +177,7 @@ function nextQuestion(){
 // This function displays user's final score along with input box to put their initial and button to save the highscore.
 function finalScoreMessage(){
 
-    // Hiding the question list section --  THIS NEEDS TO BE FIXED.  
+    // Hiding the question list section 
     hideAllSection();
     
     secondsLeft = 1;
